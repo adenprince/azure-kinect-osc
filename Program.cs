@@ -8,12 +8,11 @@
 
     class Program
     {
-        static void Main(string[] args)
+        static void Main(string address = "127.0.0.1", int port = 12345)
         {
-            IPAddress address = IPAddress.Parse("127.0.0.1");
-            int port = 12345;
+            IPAddress ipAddress = IPAddress.Parse(address);
 
-            using (OscSender sender = new OscSender(address, port))
+            using (OscSender sender = new OscSender(ipAddress, port))
             using (Device device = Device.Open()) {
                 sender.Connect();
 
