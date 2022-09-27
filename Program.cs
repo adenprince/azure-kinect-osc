@@ -1,15 +1,22 @@
 ﻿namespace AzureKinectOSC
 {
     using System;
+    using System.Net;
     using Microsoft.Azure.Kinect.BodyTracking;
     using Microsoft.Azure.Kinect.Sensor;
+    using Rug.Osc;
 
     class Program
     {
         static void Main(string[] args)
         {
-            // Open device
+            IPAddress address = IPAddress.Parse("127.0.0.1");
+            int port = 12345;
+
+            using (OscSender sender = new OscSender(address, port))
             using (Device device = Device.Open()) {
+                sender.Connect();
+
                 device.StartCameras(new DeviceConfiguration() {
                     CameraFPS = FPS.FPS30,
                     ColorResolution = ColorResolution.Off,
@@ -30,11 +37,16 @@
                         using (Frame frame = tracker.PopResult(TimeSpan.Zero, throwOnTimeout: false)) {
                             if (frame != null) {
                                 Console.WriteLine($"{frame.NumberOfBodies} bodies detected");
-                                for (uint i = 0; i < frame.NumberOfBodies; ++i) {
-                                    var skeleton = frame.GetBodySkeleton(i);
+                                for (uint bodyId = 0; bodyId < frame.NumberOfBodies; ++bodyId) {
+                                    var skeleton = frame.GetBodySkeleton(bodyId);
 
                                     for (int jointId = 0; jointId < (int)JointId.Count; ++jointId) {
                                         var joint = skeleton.GetJoint(jointId);
+
+                                        sender.Send(new OscMessage($"/bodies/{bodyId}/joints/{jointId}",
+                                            joint.Position.X,
+                                            joint.Position.Y,
+                                            joint.Position.Z));
                                     }
                                 }
                             }
