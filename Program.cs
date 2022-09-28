@@ -8,7 +8,7 @@
 
     class Program
     {
-        static void Main(string address = "127.0.0.1", int port = 12345)
+        static void Main(string address = "127.0.0.1", int port = 12345, bool sendJointOrientation = false)
         {
             IPAddress ipAddress = IPAddress.Parse(address);
 
@@ -41,11 +41,27 @@
 
                                     for (int jointId = 0; jointId < (int)JointId.Count; ++jointId) {
                                         var joint = skeleton.GetJoint(jointId);
+                                        string messageAddress = $"/bodies/{bodyId}/joints/{jointId}";
+                                        OscMessage message;
 
-                                        sender.Send(new OscMessage($"/bodies/{bodyId}/joints/{jointId}",
-                                            joint.Position.X,
-                                            joint.Position.Y,
-                                            joint.Position.Z));
+                                        if (sendJointOrientation) {
+                                            message = new OscMessage(messageAddress,
+                                                joint.Position.X,
+                                                joint.Position.Y,
+                                                joint.Position.Z,
+                                                joint.Quaternion.X,
+                                                joint.Quaternion.Y,
+                                                joint.Quaternion.Z,
+                                                joint.Quaternion.W);
+                                        }
+                                        else {
+                                            message = new OscMessage(messageAddress,
+                                                joint.Position.X,
+                                                joint.Position.Y,
+                                                joint.Position.Z);
+                                        }
+
+                                        sender.Send(message);
                                     }
                                 }
                             }
