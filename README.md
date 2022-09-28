@@ -1,4 +1,6 @@
 # Azure Kinect OSC
+A command line program that sends Azure Kinect body tracking data using [Open Sound Control (OSC)](https://ccrma.stanford.edu/groups/osc/index.html).
+
 This repository uses some code from the `csharp_3d_viewer` sample in the Microsoft [`Azure-Kinect-Samples` repository](https://github.com/microsoft/Azure-Kinect-Samples/tree/master/body-tracking-samples/csharp_3d_viewer), which has the following license:
 
 ```
