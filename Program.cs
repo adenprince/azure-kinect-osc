@@ -12,10 +12,35 @@
         {
             IPAddress ipAddress = IPAddress.Parse(address);
 
-            using (OscSender sender = new OscSender(ipAddress, port))
-            using (Device device = Device.Open()) {
-                sender.Connect();
+            Device device = null;
+            OscSender sender = new OscSender(ipAddress, port);
 
+            try {
+                try {
+                    device = Device.Open();
+                }
+                catch (Exception e) {
+                    Console.WriteLine($"Failed to open Azure Kinect device with exception message: {e.Message}");
+                    throw;
+                }
+
+                try {
+                    sender.Connect();
+                }
+                catch (Exception e) {
+                    Console.WriteLine($"Failed to connect to OSC sender with exception message: {e.Message}");
+                    throw;
+                }
+            }
+            catch (Exception) {
+                device?.Dispose();
+                sender?.Dispose();
+                return;
+            }
+
+            Console.WriteLine("here :)");
+
+            try {
                 device.StartCameras(new DeviceConfiguration() {
                     CameraFPS = FPS.FPS30,
                     ColorResolution = ColorResolution.Off,
@@ -72,6 +97,10 @@
                         }
                     }
                 }
+            }
+            finally {
+                device?.Dispose();
+                sender?.Dispose();
             }
         }
     }
