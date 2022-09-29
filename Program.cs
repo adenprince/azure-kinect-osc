@@ -15,11 +15,15 @@
                 return;
             }
 
+            Console.WriteLine($"Connected to OSC Sender at {address}:{port}.");
+
             if (!TryDeviceOpen(out Device device)) {
                 sender?.Dispose();
                 device?.Dispose();
                 return;
             }
+
+            Console.WriteLine($"Opened Azure Kinect device with serial number: {device.SerialNum}.");
 
             try {
                 device.StartCameras(new DeviceConfiguration() {
