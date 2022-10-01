@@ -1,12 +1,20 @@
 # Azure Kinect OSC
 A command line program that sends Azure Kinect body tracking data using [Open Sound Control (OSC)](https://ccrma.stanford.edu/groups/osc/index.html).
 
-By default, `127.0.0.1` is the IP address used, and `12345` is the port used. The IP address and port can be set using the `address` and `port` options. Example:
+By default, `127.0.0.1` is the IP address used, and `12345` is the port used.
 
+## Command-Line Options
+- `address`: IP address the OSC sender sends to.
+- `port`: Port the OSC sender sends to.
+- `send-joint-orientation`: Whether to send joint orientation as a quaternion (set to true or false). False by default.
+- `camera-fps`: Camera frame rate (set to FPS30, FPS15, or FPS5). FPS30 by default.
+
+## Example Usage
 ```powershell
-.\AzureKinectOSC.exe --address 1.2.3.4 --port 7000
+.\AzureKinectOSC.exe --address 1.2.3.4 --port 7000 --send-joint-orientation false --camera-fps FPS30
 ```
 
+## Credit
 This repository uses some code from the `csharp_3d_viewer` sample in the Microsoft [`Azure-Kinect-Samples` repository](https://github.com/microsoft/Azure-Kinect-Samples/tree/master/body-tracking-samples/csharp_3d_viewer), which has the following license:
 
 ```
