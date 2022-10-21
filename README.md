@@ -14,6 +14,17 @@ By default, `127.0.0.1` is the IP address used, and `12345` is the port used.
 .\AzureKinectOSC.exe --address 1.2.3.4 --port 7000 --send-joint-orientation false --camera-fps FPS30
 ```
 
+## OSC Data Sent
+For each frame of body data received, information for each joint is sent to `/bodies/{bodyId}/joints/{jointId}` for the specified adddress. Values sent:
+- Joint X Position: float
+- Joint Y Position: float
+- Joint Z Position: float
+If the `send-joint-orientation` option is set, the joint orientation quaternion is also sent for each joint:
+- Joint X Orientation: float
+- Joint Y Orientation: float
+- Joint Z Orientation: float
+- Joint W Orientation: float
+
 ## Credit
 This repository uses some code from the `csharp_3d_viewer` sample in the Microsoft [`Azure-Kinect-Samples` repository](https://github.com/microsoft/Azure-Kinect-Samples/tree/master/body-tracking-samples/csharp_3d_viewer), which has the following license:
 
