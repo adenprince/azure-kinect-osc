@@ -1,15 +1,12 @@
-﻿namespace AzureKinectOSC
-{
+﻿namespace AzureKinectOSC {
     using System;
     using System.Net;
     using Microsoft.Azure.Kinect.BodyTracking;
     using Microsoft.Azure.Kinect.Sensor;
     using Rug.Osc;
 
-    class Program
-    {
-        static void Main(string address = "127.0.0.1", int port = 12345, bool sendJointOrientation = false, FPS cameraFps = FPS.FPS30)
-        {
+    class Program {
+        static void Main(string address = "127.0.0.1", int port = 12345, bool sendJointOrientation = false, FPS cameraFps = FPS.FPS30) {
             if (cameraFps != FPS.FPS30 && cameraFps != FPS.FPS15 && cameraFps != FPS.FPS5) {
                 Console.WriteLine("Set camera FPS to \"FPS30\", \"FPS15\", or \"FPS5\".");
                 return;
