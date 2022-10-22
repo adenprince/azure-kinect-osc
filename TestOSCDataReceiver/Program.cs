@@ -4,11 +4,10 @@
     using System.Net;
 
     class Program {
-        static void Main(string[] args) {
-            IPAddress address = IPAddress.Parse("127.0.0.1");
-            int port = 12345;
+        static void Main(string address = "127.0.0.1", int port = 12345) {
+            IPAddress ipAddress = IPAddress.Parse(address);
 
-            using (OscReceiver receiver = new OscReceiver(address, port)) {
+            using (OscReceiver receiver = new OscReceiver(ipAddress, port)) {
                 receiver.Connect();
 
                 while (true) {
