@@ -25,6 +25,11 @@ If the `send-joint-orientation` option is set, the joint orientation quaternion 
 - Joint Z Orientation: float
 - Joint W Orientation: float
 
+## NuGet Package Dependencies
+- Microsoft.Azure.Kinect.BodyTracking
+- Rug.Osc ([source code](https://bitbucket.org/rugcode/rug.osc/src/master/))
+- System.CommandLine.DragonFruit ([source code](https://github.com/dotnet/command-line-api))
+
 ## Credit
 This repository uses some code from the `csharp_3d_viewer` sample in the Microsoft [`Azure-Kinect-Samples` repository](https://github.com/microsoft/Azure-Kinect-Samples/tree/master/body-tracking-samples/csharp_3d_viewer), which has the following license:
 
