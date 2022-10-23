@@ -11,6 +11,8 @@
                 return;
             }
 
+            Console.WriteLine($"Connected to OSC Receiver at {address}:{port}.");
+
             try {
                 while (true) {
                     OscPacket receivedPacket = receiver.Receive();
