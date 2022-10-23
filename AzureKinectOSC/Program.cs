@@ -9,6 +9,7 @@
         static void Main(string address = "127.0.0.1", int port = 12345, bool sendJointOrientation = false, FPS cameraFps = FPS.FPS30) {
             if (cameraFps != FPS.FPS30 && cameraFps != FPS.FPS15 && cameraFps != FPS.FPS5) {
                 Console.WriteLine("Set camera FPS to \"FPS30\", \"FPS15\", or \"FPS5\".");
+                WaitForKeyInput();
                 return;
             }
 
@@ -17,6 +18,7 @@
 
             if (!TryOscSenderConnect(address, port, out OscSender sender)) {
                 sender?.Dispose();
+                WaitForKeyInput();
                 return;
             }
 
@@ -25,6 +27,7 @@
             if (!TryDeviceOpen(out Device device)) {
                 sender?.Dispose();
                 device?.Dispose();
+                WaitForKeyInput();
                 return;
             }
 
@@ -124,6 +127,11 @@
                     sender.Send(message);
                 }
             }
+        }
+
+        public static void WaitForKeyInput() {
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey();
         }
     }
 }

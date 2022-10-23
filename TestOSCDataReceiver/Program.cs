@@ -7,6 +7,7 @@
         static void Main(string address = "127.0.0.1", int port = 12345) {
             if (!TryOscReceiverConnect(address, port, out OscReceiver receiver)) {
                 receiver?.Dispose();
+                WaitForKeyInput();
                 return;
             }
 
@@ -39,6 +40,11 @@
                 Console.WriteLine($"Failed to connect to OSC receiver with exception message: {e.Message}");
                 return false;
             }
+        }
+
+        public static void WaitForKeyInput() {
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey();
         }
     }
 }
