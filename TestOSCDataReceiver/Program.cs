@@ -5,11 +5,12 @@
 
     class Program {
         static void Main(string address = "127.0.0.1", int port = 12345) {
-            IPAddress ipAddress = IPAddress.Parse(address);
+            if (!TryOscReceiverConnect(address, port, out OscReceiver receiver)) {
+                receiver?.Dispose();
+                return;
+            }
 
-            using (OscReceiver receiver = new OscReceiver(ipAddress, port)) {
-                receiver.Connect();
-
+            try {
                 while (true) {
                     OscPacket receivedPacket = receiver.Receive();
 
@@ -19,6 +20,24 @@
                         break;
                     }
                 }
+            }
+            finally {
+                receiver?.Dispose();
+            }
+        }
+
+        public static bool TryOscReceiverConnect(string address, int port, out OscReceiver receiver) {
+            receiver = null;
+
+            try {
+                IPAddress ipAddress = IPAddress.Parse(address);
+                receiver = new OscReceiver(ipAddress, port);
+                receiver.Connect();
+                return true;
+            }
+            catch (Exception e) {
+                Console.WriteLine($"Failed to connect to OSC receiver with exception message: {e.Message}");
+                return false;
             }
         }
     }
