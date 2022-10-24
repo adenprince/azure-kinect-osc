@@ -1,4 +1,6 @@
 # Azure Kinect OSC
+[![License](https://img.shields.io/github/license/adenprince/azure-kinect-osc)](LICENSE.txt)
+
 A command line program that sends Azure Kinect body tracking data using [Open Sound Control (OSC)](https://ccrma.stanford.edu/groups/osc/index.html).
 
 By default, `127.0.0.1` is the IP address used, and `12345` is the port used.
