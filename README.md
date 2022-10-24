@@ -22,6 +22,9 @@ This project was created using .NET Framework 4.7.2 and Visual Studio 2019 versi
 .\AzureKinectOSC.exe --address 1.2.3.4 --port 7000 --send-joint-orientation false --camera-fps FPS30
 ```
 
+## TestOSCDataReceiver Project
+The TestOSCDataReceiver project included in the AzureKinectOSC solution can be used to verify that OSC data is being sent properly. This program will output any OSC packets received. The default IP address is `127.0.0.1`, and the default port is `12345`. The address and port to receive packets from can be set using command-line options in the same way as the AzureKinectOSC project.
+
 ## OSC Data Sent
 For each frame of body data received, information for each joint is sent to `/bodies/{bodyId}/joints/{jointId}` for the specified address. Values sent:
 - Joint X Position: float
