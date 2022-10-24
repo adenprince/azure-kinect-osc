@@ -3,19 +3,27 @@ A command line program that sends Azure Kinect body tracking data using [Open So
 
 By default, `127.0.0.1` is the IP address used, and `12345` is the port used.
 
-## Command-Line Options
+## Building and Usage
+This project was created using .NET Framework 4.7.2 and Visual Studio 2019 version 16.11.1.
+
+1. Ensure that you have the .NET Framework 4.7.2 development tools and Visual Studio 2019 version 16.11.1 or later installed.
+2. Connect the Azure Kinect to your computer. You can check that the sensor is connected properly using the [Azure Kinect Viewer](https://learn.microsoft.com/en-us/azure/kinect-dk/azure-kinect-viewer) program included with the [Azure Kinect Sensor SDK](https://learn.microsoft.com/en-us/azure/kinect-dk/sensor-sdk-download).
+3. Open `AzureKinectOSC.sln` in Visual Studio. Select x64 as the target platform and AzureKinectOSC as the startup project. Click the Start button.
+4. Wait for Azure Kinect body tracking to start. The program displays the number of bodies detected for each frame of body data received. Press the Esc key to stop the program.
+
+### Command-Line Options
 - `address`: IP address the OSC sender sends to.
 - `port`: Port the OSC sender sends to.
 - `send-joint-orientation`: Whether to send joint orientation as a quaternion (set to true or false). False by default.
-- `camera-fps`: Camera frame rate (set to FPS30, FPS15, or FPS5). FPS30 by default.
+- `camera-fps`: Target body tracking frame rate (set to FPS30, FPS15, or FPS5). FPS30 by default.
 
-## Example Usage
+#### Example Command-Line Usage
 ```powershell
 .\AzureKinectOSC.exe --address 1.2.3.4 --port 7000 --send-joint-orientation false --camera-fps FPS30
 ```
 
 ## OSC Data Sent
-For each frame of body data received, information for each joint is sent to `/bodies/{bodyId}/joints/{jointId}` for the specified adddress. Values sent:
+For each frame of body data received, information for each joint is sent to `/bodies/{bodyId}/joints/{jointId}` for the specified address. Values sent:
 - Joint X Position: float
 - Joint Y Position: float
 - Joint Z Position: float
