@@ -25,13 +25,14 @@ This project was created using .NET Framework 4.7.2 and Visual Studio 2019 versi
 ```
 
 ## TestOSCDataReceiver Project
-The TestOSCDataReceiver project included in the AzureKinectOSC solution can be used to verify that OSC data is being sent properly. This program will output any OSC packets received. The default IP address is `127.0.0.1`, and the default port is `12345`. The address and port to receive packets from can be set using command-line options in the same way as the AzureKinectOSC project.
+The TestOSCDataReceiver project included in the AzureKinectOSC solution can be used to verify that OSC data is being sent properly. This program will output any OSC packets received. The default IP address is `127.0.0.1`, and the default port is `12345`. The address and port to receive packets from can be set using command-line options in the same way as the AzureKinectOSC project. Press the Esc key to stop the program.
 
 ## OSC Data Sent
 For each frame of body data received, information for each joint is sent to `/bodies/{bodyId}/joints/{jointId}` for the specified address. Values sent:
 - Joint X Position: float
 - Joint Y Position: float
 - Joint Z Position: float
+
 If the `send-joint-orientation` option is set, the joint orientation quaternion is also sent for each joint:
 - Joint X Orientation: float
 - Joint Y Orientation: float
@@ -39,9 +40,9 @@ If the `send-joint-orientation` option is set, the joint orientation quaternion 
 - Joint W Orientation: float
 
 ## NuGet Package Dependencies
-- Microsoft.Azure.Kinect.BodyTracking
-- Rug.Osc ([source code](https://bitbucket.org/rugcode/rug.osc/src/master/))
-- System.CommandLine.DragonFruit ([source code](https://github.com/dotnet/command-line-api))
+- [Microsoft.Azure.Kinect.BodyTracking](https://www.nuget.org/packages/Microsoft.Azure.Kinect.BodyTracking)
+- [Rug.Osc](https://www.nuget.org/packages/Rug.Osc) ([Source Code](https://bitbucket.org/rugcode/rug.osc/src/master))
+- [System.CommandLine.DragonFruit](https://www.nuget.org/packages/System.CommandLine.DragonFruit) ([Source Code](https://github.com/dotnet/command-line-api))
 
 ## Credit
 This repository uses some code from the `csharp_3d_viewer` sample in the Microsoft [`Azure-Kinect-Samples` repository](https://github.com/microsoft/Azure-Kinect-Samples/tree/master/body-tracking-samples/csharp_3d_viewer), which has the following license:
